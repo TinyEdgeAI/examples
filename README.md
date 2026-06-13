@@ -4,7 +4,7 @@ Run your models on **real edge devices** with [TinyEdge](https://tinyedge.ai) �
 
 | Notebook | What it does | Open |
 |---|---|---|
-| **LLM** | Benchmark a GGUF model, then `optimize=True` to find the best quant *per device* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) |
+| **LLM** | Benchmark **any** GGUF straight from a HuggingFace URL (no upload, any size), then `optimize=True` to find the best quant *per device* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) |
 | **Vision** | Benchmark an ONNX classifier, then `optimize=True` for measured int8 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TinyEdgeAI/examples/blob/main/tinyedge_vision_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/TinyEdgeAI/examples/blob/main/tinyedge_vision_optimize.ipynb) |
 
 Clicking a badge opens the **latest** version of the notebook in Colab or Kaggle — nothing to download.
@@ -22,8 +22,10 @@ Clicking a badge opens the **latest** version of the notebook in Colab or Kaggle
 import tinyedge
 client = tinyedge.TinyEdge(api_key="tinyedge_sk_...")
 
-# benchmark a model on every online device
-client.benchmark("model.gguf", devices=client.devices(online=True), dataset="corpus")
+# benchmark any GGUF on every online device — the device downloads it straight
+# from HuggingFace (no upload, any size). Or pass a local path / nn.Module.
+client.benchmark("hf:bartowski/Llama-3.2-1B-Instruct-GGUF/Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+                 devices=client.devices(online=True))
 
 # ...or optimize: build the compression ladder + benchmark every variant, one call
 client.benchmark("model-f16.gguf", devices=client.devices(online=True),
