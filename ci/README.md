@@ -1,6 +1,6 @@
 # TinyEdge in CI (GitHub Actions)
 
-Two ready-to-use workflows that run the TinyEdge engine on **real edge devices** from your pipeline. Both `uses:` the published `TinyEdgeAI/tinyedge-agent` actions and need only a `TINYEDGE_API_KEY` repo secret + a device online during the run.
+Two ready-to-use workflows that run the TinyEdge engine on **real edge devices** from your pipeline. Both `uses:` the published `TinyEdgeAI/tinyedge-actions` actions and need only a `TINYEDGE_API_KEY` repo secret + a device online during the run.
 
 Fork this repo, add the secret (Settings → Secrets and variables → Actions), then **Actions → Run workflow**.
 
@@ -12,7 +12,7 @@ Run: **Actions → Decide edge deployment → Run workflow**. Inputs: `model` (a
 
 In your own pipeline:
 ```yaml
-- uses: TinyEdgeAI/tinyedge-agent/actions/decide@v1
+- uses: TinyEdgeAI/tinyedge-actions/decide@v1
   with:
     api-key: ${{ secrets.TINYEDGE_API_KEY }}
     model: "hf:bartowski/Llama-3.2-1B-Instruct-GGUF"
@@ -37,7 +37,7 @@ Then **Actions → Validate edge release → Run workflow** with the baseline id
 
 In your own pipeline:
 ```yaml
-- uses: TinyEdgeAI/tinyedge-agent/actions/validate@v1
+- uses: TinyEdgeAI/tinyedge-actions/validate@v1
   with:
     api-key: ${{ secrets.TINYEDGE_API_KEY }}
     model: models/candidate.gguf
