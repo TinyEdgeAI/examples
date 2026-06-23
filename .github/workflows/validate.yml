@@ -1,0 +1,44 @@
+name: Validate edge release
+
+# Regression gate: benchmark a model on a real edge device and FAIL the build if
+# it regresses against a saved baseline (latency / RAM / accuracy / thermal).
+#
+# Run from the Actions tab → "Validate edge release" → "Run workflow".
+# The job goes GREEN when the model is within budget, RED when it isn't — that
+# red ✗ is the whole point: a regressed model never merges.
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Model to validate (a specific GGUF file: hf:owner/repo/file.gguf, or a repo path)"
+        default: "hf:bartowski/Llama-3.2-1B-Instruct-GGUF/Llama-3.2-1B-Instruct-Q4_K_M.gguf"
+        required: true
+      baseline:
+        description: "Baseline id to compare against (create one with: tinyedge baseline save <job-id>)"
+        required: true
+      device:
+        description: "Device id (blank = the baseline's device)"
+        default: ""
+      tolerance:
+        description: "Allowed % perf drift vs the baseline before failing"
+        default: "10"
+      max_latency:
+        description: "Absolute p50 latency budget (ms). Set it tight to force a RED ✗; generous/blank to PASS ✓."
+        default: ""
+  # push:
+  #   paths: ['models/**']      # uncomment to gate real model changes on PRs
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TinyEdgeAI/tinyedge-agent/actions/validate@v1
+        with:
+          api-key: ${{ secrets.TINYEDGE_API_KEY }}
+          model: ${{ inputs.model }}
+          baseline: ${{ inputs.baseline }}
+          device: ${{ inputs.device }}
+          tolerance: ${{ inputs.tolerance }}
+          max-latency: ${{ inputs.max_latency }}
+          # exit code: 0 = within budget (GREEN), 1 = regression (RED, fails the job)

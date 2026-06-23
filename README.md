@@ -9,6 +9,17 @@ Run your models on **real edge devices** with [TinyEdge](https://tinyedge.ai) �
 
 Clicking a badge opens the **latest** version of the notebook in Colab or Kaggle — nothing to download.
 
+## Or run it in CI (GitHub Actions)
+
+Same engine, fired by your pipeline — gate releases or pick the best quant on every push. See [`ci/`](ci/) for setup.
+
+| Workflow | What it does |
+|---|---|
+| [**decide**](.github/workflows/decide.yml) | sweep the quant ladder on a real device → pick the best variant → **signed deployment manifest** |
+| [**validate**](.github/workflows/validate.yml) | benchmark vs a saved baseline → **fail the build on regression** |
+
+Fork this repo, add a `TINYEDGE_API_KEY` secret, then **Actions → Run workflow**. Both use the published [`TinyEdgeAI/tinyedge-agent`](https://github.com/TinyEdgeAI/tinyedge-agent) actions (`@v1`).
+
 ## Before you run
 
 - A [tinyedge.ai](https://tinyedge.ai) account (free $25 demo credit; each notebook uses about $1).
