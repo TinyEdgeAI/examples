@@ -4,8 +4,8 @@ Run your models on **real edge devices** with [TinyEdge](https://tinyedge.ai) �
 
 | Notebook | What it does | Open |
 |---|---|---|
-| **LLM** | Benchmark **any** GGUF straight from a HuggingFace URL (no upload, any size), then `optimize=True` to find the best quant *per device* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/TinyEdgeAI/examples/blob/main/tinyedge_llm_optimize.ipynb) |
-| **Vision** | Benchmark an ONNX classifier, then `optimize=True` for measured int8 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TinyEdgeAI/examples/blob/main/tinyedge_vision_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/TinyEdgeAI/examples/blob/main/tinyedge_vision_optimize.ipynb) |
+| **LLM** | Benchmark **any** GGUF straight from a HuggingFace URL (no upload, any size), then `optimize=True` to find the best quant *per device* | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/PhysicalSystems/examples/blob/main/tinyedge_llm_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/PhysicalSystems/examples/blob/main/tinyedge_llm_optimize.ipynb) |
+| **Vision** | Benchmark an ONNX classifier, then `optimize=True` for measured int8 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/PhysicalSystems/examples/blob/main/tinyedge_vision_optimize.ipynb) [![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://github.com/PhysicalSystems/examples/blob/main/tinyedge_vision_optimize.ipynb) |
 
 Clicking a badge opens the **latest** version of the notebook in Colab or Kaggle — nothing to download.
 
@@ -18,7 +18,7 @@ Same engine, fired by your pipeline — gate releases or pick the best quant on 
 | [**decide**](.github/workflows/decide.yml) | sweep the quant ladder on a real device → pick the best variant → **signed deployment manifest** |
 | [**validate**](.github/workflows/validate.yml) | benchmark vs a saved baseline → **fail the build on regression** |
 
-Fork this repo, add a `TINYEDGE_API_KEY` secret, then **Actions → Run workflow**. Both use the published [`TinyEdgeAI/tinyedge-actions`](https://github.com/TinyEdgeAI/tinyedge-actions) actions (`@v1`).
+Fork this repo, add a `TINYEDGE_API_KEY` secret, then **Actions → Run workflow**. Both use the published [`PhysicalSystems/tinyedge-actions`](https://github.com/PhysicalSystems/tinyedge-actions) actions (`@v1`).
 
 ## Before you run
 
